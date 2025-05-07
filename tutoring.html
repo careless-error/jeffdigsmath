@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Math Tutoring - Jeff Digs Math</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<div id="navbar"></div>
+
+<main>
+
+  <section class="hero">
+    <h1>Math Tutoring</h1>
+  </section>
+
+  <div class="about-text" style="text-align: center;">
+    <p>I offer math tutoring for $40/hour, with progressive discounts based on income if needed.</p>
+    <p>Sessions can be in-person (local area) or video tutoring anywhere in the world.</p>
+    <p>Subjects include algebra, calculus, trigonometry, basic computer science, and more.</p>
+
+    <div class="button-list">
+      <a href="mailto:careless.error@jeffdigsmath.xyz" class="button" style="width: 200px;">Set Up a Session</a>
+    </div>
+  </div>
+
+</main>
+
+<div id="footer"></div>
+
+<script>
+// Fetch and inject header
+fetch("/header.html")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("navbar").innerHTML = data;
+
+    // Now that header is injected, initialize theme toggle
+    const toggleBtn = document.getElementById('themeToggle');
+    const body = document.body;
+
+    // Set saved theme on page load
+    if (localStorage.getItem('theme') === 'space') {
+      body.dataset.theme = 'space';
+    }
+
+    // Theme toggle click
+    toggleBtn.addEventListener('click', () => {
+      const newTheme = body.dataset.theme === 'space' ? 'light' : 'space';
+      body.dataset.theme = newTheme;
+      localStorage.setItem('theme', newTheme);
+    });
+  });
+
+// Fetch and inject footer
+fetch("/footer.html")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("footer").innerHTML = data;
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact - Jeff Digs Math</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      max-width: 600px;
+      margin: 2rem auto;
+      font-size: 1rem;
+    }
+
+    form label {
+      font-weight: 600;
+      color: var(--primary-color);
+      display: block;
+    }
+
+    form input,
+    form textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      border: 2px solid var(--primary-color);
+      border-radius: 6px;
+      background-color: #fff;
+      color: var(--text-main);
+      box-sizing: border-box;
+    }
+
+    form input:focus,
+    form textarea:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      background-color: #f9f9f9;
+    }
+
+    .contact-form {
+      padding: 0 1rem;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="navbar"></div>
+
+<main>
+
+  <section class="hero">
+  <h1>Contact</h1>
+  <p>Want to collab? Have suggestions? Need a tutor? Just want to chat? Drop me a line.</p>
+  <p style="font-size: 1rem; margin-top: 1rem;">
+    <a href="mailto:careless.error@jeffdigsmath.xyz" style="color: var(--text-main); text-decoration: none;">
+      ✉️ <span style="font-weight: 500;">careless.error@jeffdigsmath.xyz</span>
+    </a>
+  </p>
+</section>
+
+
+
+  <h2 class="subtitle">Send a Message</h2>
+
+  <div class="contact-form">
+    <form action="mailto:careless.error@jeffdigsmath.xyz" method="post" enctype="text/plain">
+      <label>
+        Name:<br>
+        <input type="text" name="Name" required>
+      </label>
+
+      <label>
+        Email:<br>
+        <input type="email" name="Email" required>
+      </label>
+
+      <label>
+        Message:<br>
+        <textarea name="Message" rows="6"></textarea>
+      </label>
+
+      <button type="submit" class="button" style="width: 150px;">Send</button>
+    </form>
+  </div>
+
+  <p style="font-size: 0.9rem; margin-top: 2rem; text-align: center;">
+    by submitting this form, you agree to receive email communication from me. I promise I won't spam you.
+  </p>
+
+</main>
+
+<div id="footer"></div>
+
+<script>
+// Fetch and inject header
+fetch("/header.html")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("navbar").innerHTML = data;
+
+    // Now that header is injected, initialize theme toggle
+    const toggleBtn = document.getElementById('themeToggle');
+    const body = document.body;
+
+    // Set saved theme on page load
+    if (localStorage.getItem('theme') === 'space') {
+      body.dataset.theme = 'space';
+    }
+
+    // Theme toggle click
+    toggleBtn.addEventListener('click', () => {
+      const newTheme = body.dataset.theme === 'space' ? 'light' : 'space';
+      body.dataset.theme = newTheme;
+      localStorage.setItem('theme', newTheme);
+    });
+  });
+
+// Fetch and inject footer
+fetch("/footer.html")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("footer").innerHTML = data;
+  });
+</script>
+</body>
+</html>

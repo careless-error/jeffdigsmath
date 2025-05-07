@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop - Jeff Digs Math</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<div id="navbar"></div>
+
+<main>
+  <section class="hero">
+    <h1>Shop</h1>
+    <img src="https://jeffdigsmath.xyz/wp-content/uploads/2025/04/cropped-jdmlogo-edited.png" alt="Math Nerd Banner" class="logo-img"/>
+    <p>Some merch ideas I’m kicking around — express interest if you’re into it, and I’ll print when there's demand.</p>
+  </section>
+
+  <!-- Mouse Pads -->
+  <section class="projects" style="margin-top: 4rem;">
+    <h2 class="subtitle">Formula Sheet XL Mouse Pads <br>
+      <strong>$40</strong></h2>
+    <div class="projects">
+      <div class="project">
+        <h3>Default</h3>
+        <p>Classic layout of math formulas on an XL pad.</p>
+        <div class="button-list">
+          <a href="mailto:careless.error@jeffdigsmath.xyz?subject=Mouse Pad - Default" class="button">Express Interest</a>
+        </div>
+      </div>
+
+      <div class="project">
+        <h3>Space</h3>
+        <p>Cosmic background with formulas that look galactic.</p>
+        <div class="button-list">
+          <a href="mailto:careless.error@jeffdigsmath.xyz?subject=Mouse Pad - Space" class="button">Express Interest</a>
+        </div>
+      </div>
+
+      <div class="project">
+        <h3>LOTR</h3>
+        <p>For when your problem sets feel like a quest.</p>
+        <div class="button-list">
+          <a href="mailto:careless.error@jeffdigsmath.xyz?subject=Mouse Pad - LOTR" class="button">Express Interest</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Posters -->
+  <section class="projects" style="margin-top: 4rem;">
+    <h2 class="subtitle">Poster-Sized Prints<br>
+      <strong>$20</strong></h2>
+    <div class="projects">
+      <div class="project">
+        <h3>Formula Sheet Poster</h3>
+        <p>Clean, wall-sized version of the cheat sheet. Pre-order and I’ll get one printed for you</p>
+        <div class="button-list">
+          <a href="mailto:careless.error@jeffdigsmath.xyz?subject=Poster Pre-Order" class="button">Pre-Order</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Donate -->
+      <section class="donate-section" style="margin-top: 4rem; text-align: center;">
+        <h2>Support My Work</h2>
+        <p>If you've benefited from anything I’ve built and want to contribute, you can <strong>buy me a cup of coffee</strong> ☕:</p>
+
+        <a href="https://cash.app/$jeffbro" target="_blank" class="button" style="width: 200px;">
+          Donate via Cash App
+        </a>
+      </section>
+    </div>
+  </section>
+</main>
+
+<div id="footer"></div>
+
+<script>
+// Fetch and inject header
+fetch("/header.html")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("navbar").innerHTML = data;
+
+    // Now that header is injected, initialize theme toggle
+    const toggleBtn = document.getElementById('themeToggle');
+    const body = document.body;
+
+    // Set saved theme on page load
+    if (localStorage.getItem('theme') === 'space') {
+      body.dataset.theme = 'space';
+    }
+
+    // Theme toggle click
+    toggleBtn.addEventListener('click', () => {
+      const newTheme = body.dataset.theme === 'space' ? 'light' : 'space';
+      body.dataset.theme = newTheme;
+      localStorage.setItem('theme', newTheme);
+    });
+  });
+
+// Fetch and inject footer
+fetch("/footer.html")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("footer").innerHTML = data;
+  });
+</script>
+
+</body>
+</html>

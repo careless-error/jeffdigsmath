@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About - Jeff Digs Math</title>
+  <link rel="stylesheet" href="/style.css">
+ 
+</head>
+<body>
+
+<div id="navbar"></div>
+
+<main>
+  <section class="hero">
+  <h1>Sup nerds?</h1>
+</section>
+  
+  <img src="/wp-content/uploads/2025/04/IMG_2297" alt="Jeff Picture" class="profile-pic">
+
+  <h2 class="subtitle">I'm Jeff</h2>
+
+  <div class="about-text">
+  <p>Welcome to my site. Here’s a little about me, if you’re interested.</p>
+
+  <p>After graduating high school in 2007, I gave college a shot while working three jobs. For obvious reasons, it didn’t work out. I dropped out and spent the next stretch bouncing between gigs: sales, customer service, handyman work, security, logistics, warehouse operations—I even spent some time driving around in an old VW van, trying to figure out what was next.</p>
+
+  <p>In 2024, I finally went back to school. I’m now a full-time student studying math and computer science, earning straight As and actually enjoying it. Math came back quicker than I expected, and coding feels like math and writing smashed together in a way that clicks. I’ve taken a Python class, built a few math-related projects, and I’m learning Java now. A great English class even got me into writing. Tutoring reminded me how explaining something to someone else is one of the best ways to learn it yourself.</p>
+
+  <p>When I’m not at school or studying (see: procrastinating), I like to be outside. Hiking, biking, backpacking, and bikepacking are all part of the rotation. One of these days, I’ll take six months off and thru-hike the whole PCT. I have two dogs. Indiana Bones is an old man now. He's deaf, mostly retired, and stays home most of the time. Xena’s got some trauma and a bunch of triggers, but she tries to be a good girl. I'm pretty okay at bikes and just baout anything mechanical (I used to be a car guy, but bikes are cheaper). I like figuring out how things work—bikes, cars, code, systems, people, my own brain.</p>
+
+  <p>This site is where I collect the things I’m working on: cheat sheets, code projects, tutoring tools, and anything else that feels worth keeping. It’s all a work in progress. So am I.</p>
+  </div>
+
+</main>
+
+<div id="footer"></div>
+
+<script>
+// Fetch and inject header
+fetch("/header.html")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("navbar").innerHTML = data;
+
+    // Now that header is injected, initialize theme toggle
+    const toggleBtn = document.getElementById('themeToggle');
+    const body = document.body;
+
+    // Set saved theme on page load
+    if (localStorage.getItem('theme') === 'space') {
+      body.dataset.theme = 'space';
+    }
+
+    // Theme toggle click
+    toggleBtn.addEventListener('click', () => {
+      const newTheme = body.dataset.theme === 'space' ? 'light' : 'space';
+      body.dataset.theme = newTheme;
+      localStorage.setItem('theme', newTheme);
+    });
+  });
+
+// Fetch and inject footer
+fetch("/footer.html")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("footer").innerHTML = data;
+  });
+</script>
+
+</body>
+</html>

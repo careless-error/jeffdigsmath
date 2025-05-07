@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Math Nerd Stuff</title>
+  <link rel="stylesheet" href="/style.css">
+
+</head>
+
+<body>
+
+<div id="navbar"></div>
+
+<main>
+  <section class="hero">
+  <h1>Math Nerd Stuff</h1>
+  <img src="https://jeffdigsmath.xyz/wp-content/uploads/2025/04/cropped-jdmlogo-edited.png" alt="Math Nerd Banner" class="logo-img" />
+  <p>formula sheets, calculators, and whatever else I felt like building</p>
+</section>
+ 
+
+  
+
+  
+
+  <h3>Projects:</h3>
+  <div class="projects">
+    <div class="project">
+      <h4 class= ></h4>
+    </div>
+
+    <div class="project">
+      <h3>Sheet of Power</h3>
+      <div class="button-list">
+        <a href="https://jeffdigsmath.xyz/wp-content/uploads/2025/04/Sheet-of-Power-phone.html" target="_blank" class="button" style="">mini</a>
+        <a href="https://jeffdigsmath.xyz/wp-content/uploads/2025/04/Sheet-of-Power-vert.html" target="_blank" class="button" style="width:50%">double</a>
+        <a href="https://jeffdigsmath.xyz/wp-content/uploads/2025/04/Sheet-of-Power-wide.html" target="_blank" class="button"style="width:70%">huge</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <h4></h4>
+    </div>
+  </div>
+
+</main>
+
+<div id="footer"></div>
+
+<script>
+// Fetch and inject header
+fetch("/header.html")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("navbar").innerHTML = data;
+
+    // Now that header is injected, initialize theme toggle
+    const toggleBtn = document.getElementById('themeToggle');
+    const body = document.body;
+
+    // Set saved theme on page load
+    if (localStorage.getItem('theme') === 'space') {
+      body.dataset.theme = 'space';
+    }
+
+    // Theme toggle click
+    toggleBtn.addEventListener('click', () => {
+      const newTheme = body.dataset.theme === 'space' ? 'light' : 'space';
+      body.dataset.theme = newTheme;
+      localStorage.setItem('theme', newTheme);
+    });
+  });
+
+// Fetch and inject footer
+fetch("/footer.html")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("footer").innerHTML = data;
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!-- header.html -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Source+Sans+Pro&display=swap" rel="stylesheet">
+<nav>
+  <button id="themeToggle" aria-label="Toggle theme" style="background:none; border:none; color:var(--nav-link); font-size:1.2rem; cursor:pointer;">🪐</button>
+  <a href="/">Home</a>
+  <a href="/about.html">About</a>
+  <a href="/contact.html">Contact</a>
+  <a href="/tutoring.html">Tutoring</a>
+  <a href="/shop.html">Shop</a>
+</nav>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggleBtn = document.getElementById('themeToggle');
+    const body = document.body;
+
+    // Load saved theme
+    if (localStorage.getItem('theme') === 'space') {
+      body.dataset.theme = 'space';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      const newTheme = body.dataset.theme === 'space' ? 'light' : 'space';
+      body.dataset.theme = newTheme;
+      localStorage.setItem('theme', newTheme);
+    });
+  });
+</script>
