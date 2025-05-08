@@ -1,33 +1,42 @@
-// Combined loadcontent.js
-
 // =============== PART 1: Content Loading Function ===============
 
 async function loadContent(contentFilePath, boxId, targetElementId) {
-    // Fetches the file, parses it, finds elements.
     const response = await fetch(contentFilePath);
+    if (!response.ok) {
+        console.error(`Failed to fetch ${contentFilePath}: ${response.statusText}`);
+        // Optionally, display an error message in the placeholder
+        const targetElement = document.getElementById(targetElementId);
+        if (targetElement) {
+            targetElement.innerHTML = `<p style="color:red;">Error loading content for ${boxId}.</p>`;
+        }
+        return null; // Return null or throw error to indicate failure
+    }
     const htmlText = await response.text();
     const parser = new DOMParser();
     const doc = parser.parseFromString(htmlText, 'text/html');
-    const contentBox = doc.getElementById(boxId); 
-    const targetElement = document.getElementById(targetElementId); 
+    const contentBox = doc.getElementById(boxId);
+    const targetElement = document.getElementById(targetElementId);
 
-    // Replaces the placeholder div with the actual box div from the other file.
-    // Assumes elements are always found; will error otherwise.
-    targetElement.replaceWith(contentBox.cloneNode(true)); // Correctly uses replaceWith
+    if (contentBox && targetElement) {
+        const clonedNode = contentBox.cloneNode(true);
+        targetElement.replaceWith(clonedNode);
+        return clonedNode; // Return the newly added element for potential further processing
+    } else {
+        console.error(`Could not find contentBox (ID: ${boxId}) in ${contentFilePath} or targetElement (ID: ${targetElementId}) in the main document.`);
+        if (targetElement) {
+            targetElement.innerHTML = `<p style="color:red;">Error finding content for ${boxId}.</p>`;
+        }
+        return null; // Return null or throw error
+    }
 }
 
 
 // =============== PART 2: Run Everything When Page Loads ===============
 
-// Waits for page's HTML to be ready.
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- Section A: Load all the boxes ---
-
-    // Path to content file. (MUST BE ACCURATE)
-    const contentFilePath = 'allboxes.html'; 
-
-    // List of box IDs to load. (MATCH IDs IN allboxes.html AND [boxId]-placeholder IN THIS PAGE)
+    const contentFilePath = 'allboxes.html';
     const boxIds = [
         'log-props', 'factoring-techniques', 'function-behavior', 'algebraic-limit-techniques',
         'unit-circle', 'reciprocal-identities', 'pythagorean-identities', 'even-odd-periodic',
@@ -41,71 +50,82 @@ document.addEventListener('DOMContentLoaded', () => {
         'trig-substitution', 'completing-the-square', 'trig-graphs-container'
     ];
 
-    // Loads each box listed above.
-    boxIds.forEach(boxId => {
-        const targetElementId = `${boxId}-placeholder`; 
-        loadContent(contentFilePath, boxId, targetElementId);
+    // Create an array of promises, one for each loadContent call
+    const loadPromises = boxIds.map(boxId => {
+        const targetElementId = `${boxId}-placeholder`;
+        return loadContent(contentFilePath, boxId, targetElementId);
+    });
+
+    // Wait for all content to be loaded
+    Promise.all(loadPromises).then(loadedElements => {
+        // All content is loaded (or failed gracefully if you added error handling)
+        // Now, tell MathJax to typeset the document
+        if (typeof MathJax !== "undefined" && MathJax.typesetPromise) {
+            console.log("All content loaded. Typesetting with MathJax...");
+            MathJax.typesetPromise().then(() => {
+                console.log("MathJax typesetting complete.");
+            }).catch((err) => {
+                console.error("MathJax typesetting failed:", err);
+            });
+        } else {
+            console.warn("MathJax script not loaded or typesetPromise not available.");
+        }
+    }).catch(error => {
+        console.error("Error loading one or more content boxes:", error);
+        // You might still want to try typesetting if some boxes loaded
+        if (typeof MathJax !== "undefined" && MathJax.typesetPromise) {
+            MathJax.typesetPromise().catch(err => console.error("MathJax typesetting failed after errors:", err));
+        }
     });
 
 
     // --- Section B: Set up the click interactions (Event Delegation Version) ---
+    // (Your existing click interaction code remains the same)
+    const interactiveArea = document.body;
+    let currentlyActive = null;
 
-    // Area containing boxes (change 'body' if boxes are inside a specific container like <div id="main">).
-    const interactiveArea = document.body; 
-
-    let currentlyActive = null; // Tracks the active element.
-
-    // Makes the current active element inactive.
     function deactivateCurrent(callback) {
         if (currentlyActive) {
             currentlyActive.classList.remove('active');
-            // Waits for CSS animation (400ms).
             setTimeout(() => {
                 if (callback) callback();
-            }, 400); 
+            }, 400);
         } else {
-            if (callback) callback(); // No active element.
+            if (callback) callback();
         }
     }
 
-    // Makes the clicked element active.
     function activateNew(element) {
         element.classList.add('active');
         currentlyActive = element;
     }
 
-    // Decides whether to activate or deactivate.
     function handleClick(element) {
-        if (currentlyActive === element) { // Clicked same one?
-            deactivateCurrent(() => { currentlyActive = null; }); // Deactivate.
-        } else { // Clicked a new one?
-            deactivateCurrent(() => { activateNew(element); }); // Deactivate old, activate new.
+        if (currentlyActive === element) {
+            deactivateCurrent(() => { currentlyActive = null; });
+        } else {
+            deactivateCurrent(() => { activateNew(element); });
         }
     }
 
-    // Listens for clicks inside the interactiveArea (using delegation).
     interactiveArea.addEventListener('click', (e) => {
-        // Checks if the click was inside a .box or .graphs-section.
         const clickedBox = e.target.closest('.box');
         const clickedGraphsSection = e.target.closest('.graphs-section');
 
         if (clickedBox && interactiveArea.contains(clickedBox)) {
-            handleClick(clickedBox); // Handle click on a box.
+            handleClick(clickedBox);
         } else if (clickedGraphsSection && interactiveArea.contains(clickedGraphsSection)) {
-            handleClick(clickedGraphsSection); // Handle click on graphs section.
-        } 
+            handleClick(clickedGraphsSection);
+        }
     });
 
-    // Listens for clicks anywhere on the page (to deactivate).
     document.addEventListener('click', (e) => {
-        // If the click was *not* inside a box or graphs section...
         if (!e.target.closest('.box') && !e.target.closest('.graphs-section')) {
-            if (currentlyActive) { // ...and something is active...
-                deactivateCurrent(() => { // ...deactivate it.
+            if (currentlyActive) {
+                deactivateCurrent(() => {
                     currentlyActive = null;
                 });
             }
         }
     });
-
-}); // End of DOMContentLoaded listener
+});
