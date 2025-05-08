@@ -19,8 +19,13 @@ async function loadContent(contentFilePath, boxId, targetElementId) {
 
     if (contentBox && targetElement) {
         const clonedNode = contentBox.cloneNode(true);
-        targetElement.replaceWith(clonedNode);
-        return clonedNode; // Return the newly added element for potential further processing
+       targetElement.replaceWith(clonedNode);
+
+       if (window.MathJax) {
+           MathJax.typesetPromise([clonedNode]);
+       }
+
+       return clonedNode;
     } else {
         console.error(`Could not find contentBox (ID: ${boxId}) in ${contentFilePath} or targetElement (ID: ${targetElementId}) in the main document.`);
         if (targetElement) {
@@ -64,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log("All content loaded. Typesetting with MathJax...");
             MathJax.typesetPromise().then(() => {
                 console.log("MathJax typesetting complete.");
+                 autoZoomPage();
             }).catch((err) => {
                 console.error("MathJax typesetting failed:", err);
             });
@@ -128,4 +134,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
+        // === PART 3: Auto-Zoom Page to Fit Window ===
+    function autoZoomPage() {
+        const ratio = (window.innerWidth * 0.98) / document.documentElement.scrollWidth;
+        document.documentElement.style.zoom = Math.min(1, ratio);
+    }
+
+    window.addEventListener('resize', autoZoomPage);
+
+
 });

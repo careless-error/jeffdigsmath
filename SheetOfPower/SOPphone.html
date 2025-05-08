@@ -1,16 +1,22 @@
-
 <!--+++ One Sheet to Rule Them All +++-->
 <!--+++ © Jeff Peterson, 2025 +++-->
-
 
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
   <head>
-
     <!--Fonts-->
-    <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap"
+      rel="stylesheet"
+    />
 
     <meta charset="UTF-8" />
 
@@ -18,453 +24,487 @@
 
     <!--MathJax for LaTeX Rendering-->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
 
     <script>
-     const themes = ['light', 'dark', 'lotr'];
+      const themes = ['light', 'dark', 'lotr'];
 
-     function cycleTheme() {
-       const html = document.documentElement;
-       const current = html.getAttribute('data-theme');
-       const index = themes.indexOf(current);
-       const next = themes[(index + 1) % themes.length];
-       html.setAttribute('data-theme', next);
-       const label = next.charAt(0).toUpperCase() + next.slice(1);
-       document.getElementById('themeToggle').innerText = label;
-       const url = new URL(window.location);
-       url.searchParams.set('theme', next);
-       history.replaceState(null, '', url);
-     }
-     window.addEventListener('DOMContentLoaded', () => {
-       const current = document.documentElement.getAttribute('data-theme') || 'light';
-       const label = current.charAt(0).toUpperCase() + current.slice(1);
-       document.getElementById('themeToggle').innerText = label;
-     });
-   </script>
-     <!-- [STYLE] Global Themes and Styles -->
-     <style>
-       /* [STYLE] Themes */
-         [data-theme="light"] {
-           --font-title: 'Source Sans Pro', sans-serif;
-           --font-body: 'Source Sans Pro', sans-serif;
+      function cycleTheme() {
+        const html = document.documentElement;
+        const current = html.getAttribute('data-theme') || 'light';
+        const index = themes.indexOf(current);
+        const next = themes[(index + 1) % themes.length];
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('preferredTheme', next); //Save to localStorage
+        document.getElementById('themeToggle').innerText = capitalize(next);
+        const url = new URL(window.location);
+        url.searchParams.set('theme', next);
+        history.replaceState(null, '', url);
+      }
 
-           --bg-body: #ffffff;
-           --wrapper-bg: #ffffff;
-           --wrapper-border: #000000;
+      function capitalize(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+      }
 
-           --box-bg: #ffffff;
-           --box-border: #000000;
+      window.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('preferredTheme');
+        const html = document.documentElement;
+        const currentTheme = savedTheme || html.getAttribute('data-theme') || 'light';
+        html.setAttribute('data-theme', currentTheme);
+        document.getElementById('themeToggle').innerText = capitalize(currentTheme);
+      });
+    </script>
 
-           --text-title: #000000;
-           --text-main: #000000;
+    <!-- [STYLE] Global Themes and Styles -->
+    <style>
+      /* [STYLE] Themes */
+      [data-theme="light"] {
+        --font-title: "Source Sans Pro", sans-serif;
+        --font-body: "Source Sans Pro", sans-serif;
 
-           --section-heading-text: #000000;
-           --section-heading-bg: #f8b26a;
+        --bg-body: #ffffff;
+        --wrapper-bg: #ffffff;
+        --wrapper-border: #000000;
 
-           --table-text: #000000;
-           --table-head-text: #000000;
-           --table-head-bg: #adddff;
+        --box-bg: #ffffff;
+        --box-border: #000000;
 
-           --signature-text: rgba(0, 0, 0, 0.5);
-         }
+        --text-title: #000000;
+        --text-main: #000000;
 
-         /* Dark Theme */
-         [data-theme="dark"] {
-           --font-title: 'Orbitron', sans-serif;
-           --font-body: 'Source Sans Pro', sans-serif;
+        --section-heading-text: #000000;
+        --section-heading-bg: #f8b26a;
 
-           --bg-body: #0d0d0d;
-           --wrapper-bg: #111827;
-           --wrapper-border: #ffffff;
+        --table-text: #000000;
+        --table-head-text: #000000;
+        --table-head-bg: #adddff;
 
-           --box-bg: #1f2937;
-           --box-border: #888888;
+        --signature-text: rgba(0, 0, 0, 0.5);
+      }
 
-           --text-title: #00ffff;
-           --text-main: #ffffff;
+      /* Dark Theme */
+      [data-theme="dark"] {
+        --font-title: "Orbitron", sans-serif;
+        --font-body: "Source Sans Pro", sans-serif;
 
-           --section-heading-text: #000000;
-           --section-heading-bg: #cc99ff;
+        --bg-body: #0d0d0d;
+        --wrapper-bg: #111827;
+        --wrapper-border: #ffffff;
 
-           --table-text: #ffffff;
-           --table-head-text: #000000;
-           --table-head-bg: #66ffd9;
+        --box-bg: #1f2937;
+        --box-border: #888888;
 
-           --signature-text: rgba(255, 255, 255, 0.4);
+        --text-title: #00ffff;
+        --text-main: #ffffff;
 
-          .box.active,
-          .graphs-section.active {
-            animation: pulse-glow 0.5s ease forwards;
-          }
-         }
+        --section-heading-text: #000000;
+        --section-heading-bg: #cc99ff;
 
-         /* 🧙‍♂️ LOTR Theme */
-         [data-theme="lotr"] {
-           --font-title: 'Uncial Antiqua', serif;
-           --font-body: 'Georgia', serif;
+        --table-text: #ffffff;
+        --table-head-text: #000000;
+        --table-head-bg: #66ffd9;
 
-           --bg-body: #1b1208;
-           --wrapper-bg: #1b1208;
-           --wrapper-border: #0a0603;
+        --signature-text: rgba(255, 255, 255, 0.4);
 
-           --box-bg: #fdf8e4;
-           --box-border: #bfae84;
+        .box.active,
+        .graphs-section.active {
+          animation: pulse-glow 0.5s ease forwards;
+        }
+      }
 
-           --text-title: #eec857;
-           --text-main: #1a1208;
-           --table-text: #1a1208;
+      /* 🧙‍♂️ LOTR Theme */
+      [data-theme="lotr"] {
+        --font-title: "Uncial Antiqua", serif;
+        --font-body: "Georgia", serif;
 
-           --section-heading-text: #1a1208;
-           --section-heading-bg: #e2b647;
+        --bg-body: #1b1208;
+        --wrapper-bg: #1b1208;
+        --wrapper-border: #0a0603;
 
-           --table-head-text: #fff2cc;
-           --table-head-bg: #2d5033;
+        --box-bg: #fdf8e4;
+        --box-border: #bfae84;
 
-           --signature-text: rgba(226, 182, 71, 0.15);
-         }
+        --text-title: #eec857;
+        --text-main: #1a1208;
+        --table-text: #1a1208;
 
-         [data-theme="lotr"] .title {
-           color: var(--text-title);
-           text-shadow: 0 0 4px #a8741a;
-         }
+        --section-heading-text: #1a1208;
+        --section-heading-bg: #e2b647;
 
-         [data-theme="lotr"] .box.active,
-         [data-theme="lotr"] .graphs-section.active {
-           animation: pulse-glow-lotr 0.5s ease forwards;
-         }
+        --table-head-text: #fff2cc;
+        --table-head-bg: #2d5033;
 
-         /* Theme Toggle Button */
-         #themeToggle {
-           position: absolute;
-           top: .2%;
-           right: 12px;
-           background: var(--wrapper-bg);
-           color: var(--text-main);
-           border: 2px solid var(--box-border);
-           font-family: var(--font-body);
-           font-size: 13px;
-           padding: 4px 8px;
-           border-radius: 16px;
-           cursor: pointer;
-           transition: background 0.2s ease, color 0.2s ease;
-         }
+        --signature-text: rgba(226, 182, 71, 0.15);
+      }
 
-         #themeToggle:hover {
-           background: var(--box-bg);
-         }
+      [data-theme="lotr"] .title {
+        color: var(--text-title);
+        text-shadow: 0 0 4px #a8741a;
+      }
+
+      [data-theme="lotr"] .box.active,
+      [data-theme="lotr"] .graphs-section.active {
+        animation: pulse-glow-lotr 0.5s ease forwards;
+      }
+
+      /* Theme Toggle Button */
+      #themeToggle {
+        background: var(--wrapper-bg);
+        color: var(--text-main);
+        border: 2px solid var(--box-border);
+        font-family: var(--font-body);
+        font-size: 13px;
+        padding: 4px 8px;
+        border-radius: 16px;
+        cursor: pointer;
+        transition: background 0.2s ease, color 0.2s ease;
+      }
+
+      #themeToggle:hover {
+        background: var(--box-bg);
+      }
+
+      .sheet-footer-buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 0 10px;
+        margin-top: 12px;
+        margin-bottom: 8px;
+        box-sizing: border-box;
+      }
+
+      .footer-left,
+      .footer-right {
+        display: flex;
+        gap: 8px;
+      }
+
+      .sheet-footer-buttons button {
+        background: var(--wrapper-bg);
+        color: var(--text-main);
+        border: 2px solid var(--box-border);
+        font-family: var(--font-body);
+        font-size: 13px;
+        padding: 4px 10px;
+        border-radius: 16px;
+        cursor: pointer;
+        transition: background 0.2s ease, color 0.2s ease;
+      }
+
+      .sheet-footer-buttons button:hover {
+        background: var(--box-bg);
+      }
 
       /*=== Layout and Core Styles ===*/
+      html,
+      body {
+        width: 100%;
+      }
 
-          html, body {
-            width: 100%;
-          }
+      body {
+        font-family: var(--font-body);
+        font-size: 20px;
+        margin: 0;
+        padding: 0;
+        background: var(--bg-body);
+        color: var(--text-main);
+      }
 
-          body {
-            font-family: var(--font-body);
-            font-size: 20px;
-            margin: 0;
-            padding: 0;
-            background: var(--bg-body);
-            color: var(--text-main);
-          }
+      .title-heading {
+        font-family: var(--font-title);
+        font-weight: bold;
+        text-align: center;
+        font-size: 26px;
+        padding: 4px;
+        margin-bottom: 10px;
+        color: var(--text-title);
+      }
 
-          .title-heading {
-            font-family: var(--font-title);
-            font-weight: bold;
-            text-align: center;
-            font-size: 26px;
-            padding: 4px;
-            margin-bottom: 10px;
-            color: var(--text-title);
-          }
+      body,
+      .title-heading {
+        transition: font-family 0.3s ease;
+      }
 
-          body, .title-heading {
-            transition: font-family 0.3s ease;
-          }
+      .sheet-wrapper {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: auto;
+        max-width: 750px;
+        min-width: 350px;
+        padding: 15px 55px 10px 15px;
+        background: var(--wrapper-bg);
+        border: 5px solid var(--wrapper-border);
+        border-radius: 20px;
+        box-sizing: border-box;
+        margin: 10px auto;
+      }
 
-          .sheet-wrapper {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: auto;
-            max-width: 750px;
-            min-width: 350px;
-            padding: 15px 55px 10px 15px;
-            background: var(--wrapper-bg);
-            border: 5px solid var(--wrapper-border);
-            border-radius: 20px;
-            box-sizing: border-box;
-            margin: 10px auto;
-          }
+      .main-layout {
+        display: flex;
+        flex-direction: column; /* stack everything vertically */
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+        padding: 20px;
+        margin: auto;
+        gap: 20px; /* spacing between each box */
+      }
 
-        .main-layout {
-          display: flex;
-          flex-direction: column; /* stack everything vertically */
-          align-items: center;
-          justify-content: flex-start;
-          width: 100%;
-          padding: 20px;
-          margin: auto;
-          gap: 20px; /* spacing between each box */
+      .graphs-section {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        gap: 10px;
+        box-sizing: border-box;
+        flex: 1 1 auto;
+        padding: 0px;
+      }
+
+      .graphs-section.active {
+        animation: pulse-grow 0.5s ease forwards;
+        z-index: 20;
+      }
+
+      .algebra-container,
+      .trig-container,
+      .calculus-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        flex: none;
+        width: fit-content;
+        gap: 10px;
+      }
+
+      .graphs-container {
+        flex: 1 1 auto;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, auto);
+        width: 100%; /* <--- key */
+        background: var(--trig-graphs-bg);
+        border: 3px solid var(--box-border);
+        border-radius: 14px;
+        padding: 0px;
+        text-align: center;
+        color: var(--trig-graphs-text);
+        word-break: break-word;
+        justify-items: center;
+        box-sizing: border-box;
+        margin-top: -7px;
+        margin-bottom: 4px;
+        margin-left: 6px;
+      }
+
+      .a-section-heading,
+      .t-section-heading,
+      .c-section-heading {
+        font-weight: bold;
+        font-size: 24px;
+        border-radius: 12px 12px 0 0;
+        text-align: center;
+        margin-left: auto; /* <-- center the heading block */
+        margin-right: auto; /* <-- center the heading block */
+        display: inline-block;
+        color: var(--section-heading-text);
+        background: var(--section-heading-bg);
+        width: calc(80%);
+      }
+
+      .g-section-heading {
+        font-weight: bold;
+        font-size: 24px;
+        border-radius: 12px 12px 0 0;
+        text-align: center;
+        width: 80%;
+        margin-left: auto; /* <-- center the heading block */
+        margin-right: auto; /* <-- center the heading block */
+        display: inline-block;
+        color: var(--section-heading-text);
+        background: var(--section-heading-bg);
+      }
+
+      .box {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        min-width: fit-content;
+        width: 100%;
+        background: var(--box-bg);
+        border: 3px solid var(--box-border);
+        padding: 4px;
+        border-radius: 14px;
+        text-align: center;
+        word-break: break-word;
+        color: var(--box-text);
+        margin-top: -7px;
+        margin-bottom: 4px;
+        cursor: pointer;
+        transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+          box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+          filter 0.5s cubic-bezier(0.22, 1, 0.36, 1), z-index 0.3s ease;
+        transform-origin: center center;
+        will-change: transform;
+        transform: scale(1);
+      }
+
+      .box.active {
+        animation: pulse-grow 0.5s ease forwards;
+        z-index: 20;
+      }
+
+      /* [FONT STYLING] Use title font for section headings and box titles */
+      .a-section-heading,
+      .t-section-heading,
+      .c-section-heading,
+      .g-section-heading,
+      .box strong {
+        font-family: var(--font-title);
+      }
+
+      .trig-graph img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+      }
+
+      .trig-graph img.active {
+        animation: pulse-grow 0.5s ease forwards;
+        z-index: 10;
+      }
+
+      table {
+        flex: 1;
+        height: 100%;
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: auto;
+        text-align: center;
+        background: var(--table-bg);
+        color: var(--table-text);
+      }
+
+      table strong {
+        display: block;
+        background: var(--table-head-bg);
+        color: var(--table-head-text);
+        border-radius: 12px 12px 0 0;
+        padding: 4px 6px;
+        margin-bottom: 4px;
+      }
+
+      th,
+      td {
+        vertical-align: top;
+        word-wrap: break-word;
+        padding-bottom: 4px;
+      }
+
+      /* [SIGNATURE] Footer Signature Text */
+      .signature {
+        font-size: 10px;
+        text-align: right;
+        color: var(--signature-text);
+        margin-top: 8px;
+        margin-bottom: 4px;
+      }
+
+      .box,
+      .graphs-section,
+      .trig-graph {
+        transition: transform 0.4s ease, filter 0.4s ease, box-shadow 0.4s ease;
+      }
+
+      /* [ANIMATIONS] Keyframes */
+
+      /* Pulse Grow (Default for most themes) */
+      @keyframes pulse-grow {
+        0% {
+          transform: scale(1) rotate(0deg);
+          box-shadow: none;
+          filter: brightness(100%);
         }
-    
-         .graphs-section {
-           display: flex;
-           flex-direction: column;
-           align-items: stretch;
-           width: 100%;
-           gap: 10px;
-           box-sizing: border-box;
-           flex: 1 1 auto;
-           padding: 0px;
-         }
+        50% {
+          transform: scale(1.4) rotate(1deg);
+          box-shadow: none;
+          filter: brightness(120%);
+        }
+        100% {
+          transform: scale(1.3) rotate(0deg);
+          box-shadow: none;
+          filter: brightness(110%);
+        }
+      }
 
-          .graphs-section.active {
-            animation: pulse-grow 0.5s ease forwards;
-            z-index: 20;
-          }
+      /* Pulse Glow (Neon Blue Glow for Space Theme and Graphs) */
+      @keyframes pulse-glow {
+        0% {
+          transform: scale(1) rotate(0deg);
+          box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+          filter: brightness(100%) drop-shadow(0 0 0px #00ffe0);
+        }
+        50% {
+          transform: scale(1.4) rotate(1deg);
+          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+          filter: brightness(120%) drop-shadow(0 0 12px #00ffe0);
+        }
+        100% {
+          transform: scale(1.3) rotate(0deg);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+          filter: brightness(110%) drop-shadow(0 0 8px #00ffe0);
+        }
+      }
 
-          .algebra-container,
-          .trig-container,
-          .calculus-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            flex: none;
-            width: fit-content;
-            gap: 10px;
-          }
-
-          
-          .graphs-container {
-            flex: 1 1 auto;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(3, auto);
-            width: 100%; /* <--- key */
-            background: var(--trig-graphs-bg);
-            border: 3px solid var(--trig-graphs-border);
-            border-radius: 14px;
-            padding: 0px;
-            text-align: center;
-            color: var(--trig-graphs-text);
-            word-break: break-word;
-            justify-items: center;
-            box-sizing: border-box;
-            margin-top: -7px;
-            margin-bottom: 4px;
-            margin-left: 6px;
-          }
-
-          .a-section-heading,
-          .t-section-heading,
-          .c-section-heading {
-            font-weight: bold;
-            font-size: 24px;
-            border-radius: 12px 12px 0 0;
-            text-align: center;
-            margin-left: auto;   /* <-- center the heading block */
-            margin-right: auto;  /* <-- center the heading block */
-            display: inline-block;    
-            color: var(--section-heading-text);
-            background: var(--section-heading-bg);
-            width: calc(80%);
-          }
-
-          .g-section-heading {
-            font-weight: bold;
-            font-size: 24px;
-            border-radius: 12px 12px 0 0;
-            text-align: center;
-            width: 80%;
-            margin-left: auto;   /* <-- center the heading block */
-            margin-right: auto;  /* <-- center the heading block */
-            display: inline-block;   
-            color: var(--section-heading-text);
-            background: var(--section-heading-bg);
-          }
-        
-
-          .box {
-            flex: 1 1 auto;
-            display: flex;
-            flex-direction: column;
-            min-width: fit-content;
-            width: 100%;
-            background: var(--box-bg);
-            border: 3px solid var(--box-border);
-            padding: 4px;
-            border-radius: 14px;
-            text-align: center;
-            word-break: break-word;
-            color: var(--box-text);
-            margin-top: -7px;
-            margin-bottom: 4px;
-            cursor: pointer;
-            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-                        box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-                        filter 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-                        z-index 0.3s ease;
-            transform-origin: center center;
-            will-change: transform;
-            transform: scale(1);
-          }
-
-          .box.active {
-            animation: pulse-grow 0.5s ease forwards;
-            z-index: 20;
-          }
-
-          /* [FONT STYLING] Use title font for section headings and box titles */
-          .a-section-heading,
-          .t-section-heading,
-          .c-section-heading,
-          .g-section-heading,
-          .box strong {
-            font-family: var(--font-title);
-          }
-
-          .trig-graph img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            
-          }
-
-          .trig-graph img.active {
-            animation: pulse-grow 0.5s ease forwards;
-            z-index: 10;
-          }
-
-          table {
-            flex: 1;
-            height: 100%;
-            width: 100%;
-            border-collapse: collapse;
-            table-layout: auto;
-            text-align: center;
-            background: var(--table-bg);
-            color: var(--table-text);
-          }
-
-          table strong {
-            display: block;
-            background: var(--table-head-bg);
-            color: var(--table-head-text);
-            border-radius: 12px 12px 0 0;
-            padding: 4px 6px;
-            margin-bottom: 4px;
-          }
-
-          th,
-          td {
-            vertical-align: top;
-            word-wrap: break-word;
-            padding-bottom: 4px;
-          }
-
-        /* [SIGNATURE] Footer Signature Text */
-          .signature {
-            font-size: 8px;
-            text-align: right;
-            color: var(--signature-text);
-            margin-top: 8px;
-            margin-bottom: 4px;
-          }
-
-          .box,
-          .graphs-section,
-          .trig-graph {
-            transition: 
-              transform 0.4s ease,
-              filter 0.4s ease,
-              box-shadow 0.4s ease;
-          }
-
-          /* [ANIMATIONS] Keyframes */
-
-          /* Pulse Grow (Default for most themes) */
-          @keyframes pulse-grow {
-            0% {
-              transform: scale(1) rotate(0deg);
-              box-shadow: none;
-              filter: brightness(100%);
-            }
-            50% {
-              transform: scale(1.4) rotate(1deg);
-              box-shadow: none;
-              filter: brightness(120%);
-            }
-            100% {
-              transform: scale(1.3) rotate(0deg);
-              box-shadow: none;
-              filter: brightness(110%);
-            }
-          }
-
-          /* Pulse Glow (Neon Blue Glow for Space Theme and Graphs) */
-          @keyframes pulse-glow {
-            0% {
-              transform: scale(1) rotate(0deg);
-              box-shadow: 0 0 0 rgba(0,0,0,0);
-              filter: brightness(100%) drop-shadow(0 0 0px #00ffe0);
-            }
-            50% {
-              transform: scale(1.4) rotate(1deg);
-              box-shadow: 0 12px 40px rgba(0,0,0,0.6);
-              filter: brightness(120%) drop-shadow(0 0 12px #00ffe0);
-            }
-            100% {
-              transform: scale(1.3) rotate(0deg);
-              box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-              filter: brightness(110%) drop-shadow(0 0 8px #00ffe0);
-            }
-          }
-
-          /* Pulse Glow LOTR (Golden Glow for LOTR Theme) */
-          @keyframes pulse-glow-lotr {
-            0% {
-              transform: scale(1) rotate(0deg);
-              box-shadow: 0 0 0 rgba(0,0,0,0);
-              filter: brightness(100%) drop-shadow(0 0 0px #ffcc66);
-            }
-            50% {
-              transform: scale(1.4) rotate(1deg);
-              box-shadow: 0 12px 40px rgba(255,204,102,0.6);
-              filter: brightness(120%) drop-shadow(0 0 12px #ffcc66);
-            }
-            100% {
-              transform: scale(1.3) rotate(0deg);
-              box-shadow: 0 8px 24px rgba(255,204,102,0.5);
-              filter: brightness(110%) drop-shadow(0 0 8px #ffcc66);
-            }
-          }
-    </style>  
+      /* Pulse Glow LOTR (Golden Glow for LOTR Theme) */
+      @keyframes pulse-glow-lotr {
+        0% {
+          transform: scale(1) rotate(0deg);
+          box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+          filter: brightness(100%) drop-shadow(0 0 0px #ffcc66);
+        }
+        50% {
+          transform: scale(1.4) rotate(1deg);
+          box-shadow: 0 12px 40px rgba(255, 204, 102, 0.6);
+          filter: brightness(120%) drop-shadow(0 0 12px #ffcc66);
+        }
+        100% {
+          transform: scale(1.3) rotate(0deg);
+          box-shadow: 0 8px 24px rgba(255, 204, 102, 0.5);
+          filter: brightness(110%) drop-shadow(0 0 8px #ffcc66);
+        }
+      }
+    </style>
   </head>
   <body>
     <!--Whole Sheet-->
     <div class="sheet-wrapper">
-      <button id="themeToggle" onclick="cycleTheme()">Default</button>
       <div class="title-heading">One Sheet to Rule Them All</div>
       <div class="main-layout">
-         
-          <!-- [CONTAINER] Algebra -->
-          <div class="algebra-container">
-            <div class="a-section-heading">Algebra</div>
+        <!-- [CONTAINER] Algebra -->
+        <div class="algebra-container">
+          <div class="a-section-heading">Algebra</div>
 
-            <div id="log-props-placeholder"></div>
+          <div id="log-props-placeholder"></div>
 
-            <div id="factoring-techniques-placeholder"></div>
+          <div id="factoring-techniques-placeholder"></div>
 
-            <div id="function-behavior-placeholder"></div>
+          <div id="function-behavior-placeholder"></div>
 
-            <div id="algebraic-limit-techniques-placeholder"></div>
+          <div id="algebraic-limit-techniques-placeholder"></div>
 
           <!--Trigonometry-->
           <div class="trig-container">
-          <div class="t-section-heading">Trigonometry</div>
+            <div class="t-section-heading">Trigonometry</div>
 
             <div id="unit-circle-placeholder"></div>
 
@@ -482,7 +522,6 @@
 
             <div id="product-to-sum-placeholder"></div>
 
-
             <div class="graphs-section">
               <div class="g-section-heading">Trig Function Graphs</div>
 
@@ -492,70 +531,81 @@
             <!-- [SECTION] Calculus -->
             <div class="c-section-heading">Calculus</div>
             <div class="calculus-container">
+              <div id="limit-definition-placeholder"></div>
 
-                <div id="limit-definition-placeholder"></div>
+              <div id="derivative-differentials-approx-placeholder"></div>
 
-                <div id="derivative-differentials-approx-placeholder"></div>
+              <div id="special-limits-placeholder"></div>
 
-                <div id="special-limits-placeholder"></div>
+              <div id="rolles-placeholder"></div>
 
-                <div id="rolles-placeholder"></div>
+              <div id="mvt-placeholder"></div>
 
-                <div id="mvt-placeholder"></div>
+              <div id="ivt-placeholder"></div>
 
-                <div id="ivt-placeholder"></div>
+              <div id="graph-sketching-placeholder"></div>
 
-                <div id="graph-sketching-placeholder"></div>
+              <div id="asymptotes-placeholder"></div>
 
-                <div id="asymptotes-placeholder"></div>
+              <div id="diff-rules-placeholder"></div>
 
-                <div id="diff-rules-placeholder"></div>
+              <div id="trig-derivatives-placeholder"></div>
 
-                <div id="trig-derivatives-placeholder"></div>
+              <div id="related-rates-placeholder"></div>
 
-                <div id="related-rates-placeholder"></div>
+              <div id="optimization-placeholder"></div>
 
-                <div id="optimization-placeholder"></div>
+              <div id="sqrt-approx-placeholder"></div>
 
-                <div id="sqrt-approx-placeholder"></div>
+              <div id="summation-identities-placeholder"></div>
 
-                <div id="summation-identities-placeholder"></div>
+              <div id="Riemann-Sums-placeholder"></div>
 
-                <div id="Riemann-Sums-placeholder"></div>
+              <div id="integration-rules-placeholder"></div>
 
-                <div id="integration-rules-placeholder"></div>
+              <div id="u-Substitution-placeholder"></div>
 
-                <div id="u-Substitution-placeholder"></div>
+              <div id="even-odd-integration-placeholder"></div>
 
-                <div id="even-odd-integration-placeholder"></div>
+              <div id="inverse-log-integrals-placeholder"></div>
 
-                <div id="inverse-log-integrals-placeholder"></div>
+              <div id="definite-integral-placeholder"></div>
 
-                <div id="definite-integral-placeholder"></div>
+              <div id="properties-integrals-placeholder"></div>
 
-                <div id="properties-integrals-placeholder"></div>
+              <div id="fundamental-theorem-of-calculus-placeholder"></div>
 
-                <div id="fundamental-theorem-of-calculus-placeholder"></div>
+              <div id="second-fundamental-theorem-placeholder"></div>
 
-                <div id="second-fundamental-theorem-placeholder"></div>
+              <div id="mvt-integrals-placeholder"></div>
 
-                <div id="mvt-integrals-placeholder"></div>
+              <div id="lhopital-placeholder"></div>
 
-                <div id="lhopital-placeholder"></div>
+              <div id="integration-by-parts-placeholder"></div>
 
-                <div id="integration-by-parts-placeholder"></div>
+              <div id="trig-substitution-placeholder"></div>
 
-                <div id="trig-substitution-placeholder"></div>
-
-                <div id="completing-the-square-placeholder"></div>
-              </div>
+              <div id="completing-the-square-placeholder"></div>
             </div>
           </div>
+        </div>
+      </div>
 
-    <!-- [SIGNATURE] -->
-    <div class="signature">© Jeff Peterson, 2025</div>
+      <!-- [SIGNATURE] -->
+      <div class="signature">© <a href="https://jeffdigsmath.xyz" target="_blank" style="color: inherit; text-decoration: none;">jeffdigsmath.xyz</a>, 2025</div>
+    </div>
+    <div class="sheet-footer-buttons">
+      <div class="footer-left">
+        <button onclick="window.location.href='SOPphone.html'">Phone</button>
+        <button onclick="window.location.href='SOPdouble.html'">Double</button>
+        <button onclick="window.location.href='OneTrueSheet.html'">Full</button>
+        <button onclick="window.location.href='SOPwide.html'">Wide</button>
+      </div>
+      <div class="footer-right">
+        <button id="themeToggle" onclick="cycleTheme()">theme</button>
+      </div>
+    </div>
 
-   <script src="loadcontent.js"></script>
-
+    <script src="loadcontent.js"></script>
   </body>
 </html>
