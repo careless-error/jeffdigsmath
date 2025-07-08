@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Calc 2 Study Guide – Chapters 2 and 3</title>
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <style>
+        body {
+            font-family: "DejaVu Sans", sans-serif;
+            margin: 2rem;
+            line-height: 1.6;
+        }
+        h1, h2 {
+            border-bottom: 1px solid #ccc;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 0.5em;
+        }
+    </style>
+</head>
+<body>
+<h1>Calculus II Study Guide – Chapters 2 and 3</h1>
+
+<hr />
+
+<h2>2.0A – Basic Integration Rules</h2>
+
+<p><strong>General Rule</strong><br />
+[
+\int f(x)\,dx = F(x) + C
+]</p>
+
+<p><strong>Power Rule</strong><br />
+[
+\int x^n dx = \frac{x^{n+1}}{n+1} + C \quad \text{for } n \ne -1
+]</p>
+
+<p><strong>Logarithmic</strong><br />
+[
+\int \frac{1}{x} dx = \ln|x| + C
+]</p>
+
+<p><strong>Exponential</strong><br />
+[
+\int e^x dx = e^x + C
+]
+[
+\int a^x dx = \frac{a^x}{\ln a} + C \quad (a &gt; 0,\ a \ne 1)
+]</p>
+
+<p><strong>Trigonometric</strong><br />
+[
+\int \sin x\,dx = -\cos x + C
+]
+[
+\int \cos x\,dx = \sin x + C
+]
+[
+\int \sec^2 x\,dx = \tan x + C
+]
+[
+\int \csc^2 x\,dx = -\cot x + C
+]
+[
+\int \sec x \tan x\,dx = \sec x + C
+]
+[
+\int \csc x \cot x\,dx = -\csc x + C
+]</p>
+
+<hr />
+
+<h2>2.0B – Substitution</h2>
+
+<p><strong>Formula</strong><br />
+[
+\int f(g(x))g'(x)\,dx = \int f(u)\,du
+]</p>
+
+<p><strong>Definite Integral Version</strong><br />
+[
+\int<em>a^b f(g(x))g'(x)\,dx = \int</em>{u(a)}^{u(b)} f(u)\,du
+]</p>
+
+<hr />
+
+<h2>2.1 – Areas Between Curves</h2>
+
+<p><strong>Vertical Slicing</strong><br />
+[
+\int_a^b [f(x) - g(x)]\,dx
+]</p>
+
+<p><strong>Horizontal Slicing</strong><br />
+[
+\int_c^d [f(y) - g(y)]\,dy
+]</p>
+
+<hr />
+
+<h2>2.2 – Volume by Slicing (Washer Method)</h2>
+
+<p><strong>Horizontal Rotation</strong><br />
+[
+V = \pi \int_a^b \left( [R(x)]^2 - [r(x)]^2 \right) dx
+]</p>
+
+<p><strong>Vertical Rotation</strong><br />
+[
+V = \pi \int_c^d \left( [R(y)]^2 - [r(y)]^2 \right) dy
+]</p>
+
+<hr />
+
+<h2>2.3 – Cylindrical Shells</h2>
+
+<p><strong>Vertical Axis of Rotation</strong><br />
+[
+V = 2\pi \int_a^b x(\text{height})\,dx
+]</p>
+
+<p><strong>Horizontal Axis of Rotation</strong><br />
+[
+V = 2\pi \int_c^d y(\text{width})\,dy
+]</p>
+
+<hr />
+
+<h2>3.1 – Integration by Parts</h2>
+
+<p><strong>Formula</strong><br />
+[
+\int u\,dv = uv - \int v\,du
+]</p>
+
+<hr />
+
+<h2>3.2 – Trigonometric Integrals</h2>
+
+<p><strong>Identities</strong>
+[
+\sin^2 x = \frac{1 - \cos(2x)}{2}
+]
+[
+\cos^2 x = \frac{1 + \cos(2x)}{2}
+]
+[
+\sin(2x) = 2\sin x \cos x
+]
+[
+\cos(2x) = \cos^2 x - \sin^2 x
+]</p>
+
+<hr />
+
+<h2>3.3 – Trigonometric Substitution</h2>
+
+<p><strong>Patterns</strong>
+[
+\sqrt{a^2 - x^2} \Rightarrow x = a\sin\theta
+]
+[
+\sqrt{a^2 + x^2} \Rightarrow x = a\tan\theta
+]
+[
+\sqrt{x^2 - a^2} \Rightarrow x = a\sec\theta
+]</p>
+
+<hr />
+
+<h2>3.4 – Partial Fractions</h2>
+
+<p><strong>Form</strong>
+[
+\frac{P(x)}{Q(x)} \quad \text{where } \deg(P) &lt; \deg(Q)
+]</p>
+
+<p><strong>Decomposition Types</strong>
+- Linear: ( \frac{A}{x - r} )
+- Repeated Linear: ( \frac{A}{x - r} + \frac{B}{(x - r)^2} + \dots )
+- Irreducible Quadratic: ( \frac{Ax + B}{x^2 + bx + c} )</p>
+
+<hr />
+
+<h2>3.6 – Numerical Integration</h2>
+
+<p><strong>Trapezoidal Rule</strong><br />
+[
+\frac{b - a}{2n} [f(x<em>0) + 2f(x</em>1) + \dots + 2f(x<em>{n-1}) + f(x</em>n)]
+]</p>
+
+<p><strong>Simpson’s Rule</strong><br />
+[
+\frac{b - a}{3n} [f(x<em>0) + 4f(x</em>1) + 2f(x<em>2) + \dots + 4f(x</em>{n-1}) + f(x_n)]
+]</p>
+
+<hr />
+
+<h2>3.7 – Improper Integrals</h2>
+
+<p><strong>Infinite Limits</strong>
+[
+\int<em>a^\infty f(x)\,dx = \lim</em>{t \to \infty} \int_a^t f(x)\,dx
+]</p>
+
+<p><strong>Vertical Asymptotes</strong>
+[
+\int<em>a^b f(x)\,dx = \lim</em>{t \to c^-} \int_a^t f(x)\,dx \quad \text{if } f(x) \to \infty \text{ at } x = c
+]</p>
+
+<hr />
+
+<h2>3.8 – L’Hôpital’s Rule</h2>
+
+<p><strong>Forms</strong><br />
+- ( \frac{0}{0} )
+- ( \frac{\infty}{\infty} )</p>
+
+<p><strong>Rule</strong>
+[
+\lim<em>{x \to a} \frac{f(x)}{g(x)} = \lim</em>{x \to a} \frac{f'(x)}{g'(x)} \quad \text{if the limit exists}
+]</p>
+
+</body>
+</html>

@@ -1,0 +1,216 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Calc 2 Study Guide – Chapters 2 and 3</title>
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <style>
+        body {
+            font-family: "DejaVu Sans", sans-serif;
+            margin: 2rem;
+            line-height: 1.6;
+        }
+        h1, h2 {
+            border-bottom: 1px solid #ccc;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 0.5em;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Chapter 5 – Sequences and Series</h1>
+
+<h2>5.1 – Sequences</h2>
+
+<p><strong>Sequence</strong></p>
+<p>A sequence is a list of numbers in a specific order:</p>
+\[
+\{a_n\} = a_1, a_2, a_3, \dots
+\]
+
+<p><strong>Arithmetic Sequence</strong></p>
+\[
+a_n = a_1 + (n - 1)d
+\]
+<p><em>d</em>: common difference</p>
+\[
+d = a_{n+1} - a_n
+\]
+
+<p>Diverges unless \( d = 0 \)</p>
+
+<p><strong>Geometric Sequence</strong></p>
+\[
+a_n = a_1 \cdot r^{n - 1}
+\]
+<p><em>r</em>: common ratio</p>
+\[
+r = \frac{a_{n+1}}{a_n}
+\]
+
+<p>Converges if \( |r| < 1 \); diverges if \( |r| \ge 1 \)</p>
+
+<p><strong>Recursive Formulas</strong></p>
+\[
+a_{n+1} = a_n + d \quad \text{(arithmetic)}
+\]
+\[
+a_{n+1} = r \cdot a_n \quad \text{(geometric)}
+\]
+
+<p><strong>Convergence</strong></p>
+\[
+\lim_{n \to \infty} a_n = L \Rightarrow \text{sequence converges}
+\]
+
+<p><strong>Bounded Sequences</strong></p>
+<ul>
+<li>Bounded above: \( a_n \le M \)</li>
+<li>Bounded below: \( a_n \ge m \)</li>
+<li>Bounded: both above and below</li>
+</ul>
+
+<p><strong>Monotonic Sequences</strong></p>
+<ul>
+<li>Increasing: \( a_{n+1} \ge a_n \)</li>
+<li>Strictly increasing: \( a_{n+1} > a_n \)</li>
+<li>Decreasing: \( a_{n+1} \le a_n \)</li>
+<li>Strictly decreasing: \( a_{n+1} < a_n \)</li>
+<li>Monotonic: increasing or decreasing</li>
+</ul>
+
+<p><strong>Monotonic Sequence Theorem</strong></p>
+<p>If a sequence is bounded and monotonic, it converges.</p>
+
+<p><strong>Important Limits</strong></p>
+\[
+\lim_{n \to \infty} \frac{1}{n^p} = 0 \quad (p > 0)
+\]
+\[
+\lim_{n \to \infty} r^n = 0 \quad (|r| < 1)
+\]
+\[
+\lim_{n \to \infty} \frac{n^p}{e^n} = 0 \quad (p > 0)
+\]
+
+<h2>5.2 – Infinite Series</h2>
+
+<p><strong>Series</strong></p>
+\[
+\sum_{n=1}^\infty a_n
+\]
+<p>Defined as the limit of partial sums:</p>
+\[
+S_n = a_1 + a_2 + \dots + a_n, \quad \lim_{n \to \infty} S_n = L
+\]
+
+<p><strong>Terminology</strong></p>
+<ul>
+<li>\( a_n \): general term</li>
+<li>\( S_n \): partial sum</li>
+<li>Convergent: \( \lim S_n = L \) (finite)</li>
+<li>Divergent: no finite limit</li>
+</ul>
+
+<h2>5.3 – Divergence and Integral Tests</h2>
+
+<p><strong>Test for Divergence</strong></p>
+\[
+\lim_{n \to \infty} a_n \ne 0 \Rightarrow \sum a_n \text{ diverges}
+\]
+<p>If the limit equals zero, the test is inconclusive.</p>
+
+<p><strong>Geometric Series</strong></p>
+\[
+\sum_{n=0}^\infty ar^n = \frac{a}{1 - r} \quad \text{if } |r| < 1
+\]
+<p>Diverges if \( |r| \ge 1 \)</p>
+
+<p><strong>Harmonic Series</strong></p>
+\[
+\sum_{n=1}^\infty \frac{1}{n}
+\]
+<p>Diverges</p>
+
+<p><strong>Integral Test</strong></p>
+<p>If \( f(x) \) is positive, continuous, and decreasing on \( [N, \infty) \), and \( a_n = f(n) \), then:</p>
+\[
+\sum a_n \text{ and } \int_N^\infty f(x)\,dx \text{ both converge or both diverge}
+\]
+
+<h2>5.4 – Comparison Tests</h2>
+
+<p><strong>Direct Comparison Test</strong></p>
+<p>If \( 0 \le a_n \le b_n \):</p>
+<ul>
+<li>If \( \sum b_n \) converges, \( \sum a_n \) converges</li>
+<li>If \( \sum b_n \) diverges and \( a_n \ge b_n \), then \( \sum a_n \) diverges</li>
+</ul>
+
+<p><strong>Limit Comparison Test</strong></p>
+\[
+\lim_{n \to \infty} \frac{a_n}{b_n} = L, \quad 0 < L < \infty \Rightarrow \sum a_n \text{ and } \sum b_n \text{ both converge or both diverge}
+\]
+
+<p><strong>Common Comparison Targets</strong></p>
+<ul>
+<li>\( p \)-series: \( \sum \frac{1}{n^p} \), converges if \( p > 1 \), diverges if \( p \le 1 \)</li>
+<li>Geometric series: \( \sum ar^n \), converges if \( |r| < 1 \)</li>
+</ul>
+
+<h2>5.5 – Alternating Series</h2>
+
+<p><strong>Alternating Series</strong></p>
+\[
+\sum_{n=1}^\infty (-1)^n a_n \quad \text{or} \quad \sum_{n=1}^\infty (-1)^{n+1} a_n
+\]
+<p>Where \( a_n > 0 \) for all \( n \ge N \)</p>
+
+<p><strong>Alternating Series Test</strong></p>
+<p>The series converges if, for all \( n \ge N \):</p>
+<ul>
+<li>\( a_n > 0 \)</li>
+<li>\( a_n \) is decreasing</li>
+<li>\( \lim_{n \to \infty} a_n = 0 \)</li>
+</ul>
+
+<p><strong>Absolute Convergence</strong></p>
+\[
+\sum a_n \text{ is absolutely convergent if } \sum |a_n| \text{ converges}
+\]
+
+<p><strong>Conditional Convergence</strong></p>
+\[
+\sum a_n \text{ is conditionally convergent if it converges but } \sum |a_n| \text{ diverges}
+\]
+
+<h2>5.6 – Ratio and Root Tests</h2>
+
+<p><strong>Ratio Test</strong></p>
+\[
+L = \lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right|
+\]
+<ul>
+<li>If \( L < 1 \): converges absolutely</li>
+<li>If \( L > 1 \) or \( L = \infty \): diverges</li>
+<li>If \( L = 1 \): inconclusive</li>
+</ul>
+
+<p><strong>Root Test</strong></p>
+\[
+L = \lim_{n \to \infty} \sqrt[n]{|a_n|}
+\]
+<ul>
+<li>If \( L < 1 \): converges absolutely</li>
+<li>If \( L > 1 \) or \( L = \infty \): diverges</li>
+<li>If \( L = 1 \): inconclusive</li>
+</ul>
+
+</body>
+</html>
